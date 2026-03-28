@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import type { LocationData, NotificationSettings, Preferences } from './types';
+import type { Language, LocationData, NotificationSettings, Preferences } from './types';
 
 const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   fullMoon: true,
@@ -19,6 +19,7 @@ interface AppState {
   preferences: Preferences;
   locationLoading: boolean;
   locationError: string | null;
+  language: Language;
 
   getLocation: () => LocationData;
   getNotificationSettings: () => NotificationSettings;
@@ -26,6 +27,7 @@ interface AppState {
   setNotificationSettings: (settings: Partial<NotificationSettings>) => void;
   setLocationLoading: (loading: boolean) => void;
   setLocationError: (error: string | null) => void;
+  setLanguage: (language: Language) => void;
 }
 
 export type AppStore = AppState;
@@ -36,6 +38,7 @@ export const useAppStore = create<AppStore>()(
       preferences: {},
       locationLoading: false,
       locationError: null,
+      language: (typeof navigator !== 'undefined' && navigator.language?.startsWith('fr') ? 'fr' : 'en') as Language,
 
       getLocation: () => get().preferences.location ?? DEFAULT_LOCATION,
       getNotificationSettings: () =>
@@ -60,12 +63,19 @@ export const useAppStore = create<AppStore>()(
 
       setLocationLoading: (loading) => set({ locationLoading: loading }),
       setLocationError: (error) => set({ locationError: error }),
+
+      setLanguage: (language) =>
+        set((state) => ({
+          language,
+          preferences: { ...state.preferences, language },
+        })),
     }),
     {
       name: 'moon-time-storage',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (state) => ({
         preferences: state.preferences,
+        language: state.language,
       }),
     }
   )

@@ -7,17 +7,14 @@ import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Typography';
 import { getMoonData, getMoonTimes, isFullMoon, isNewMoon } from '@/utils/moon';
 import { useAppStore } from '@/store/useAppStore';
+import { useTranslation } from '@/lib/i18n';
 import ScreenBackground from '@/components/screen-background';
 import CalendarGrid from '@/components/calendar-grid';
-
-const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
 
 export default function CalendarScreen() {
   const insets = useSafeAreaInsets();
   const location = useAppStore((s) => s.getLocation());
+  const { t } = useTranslation();
 
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
@@ -64,11 +61,7 @@ export default function CalendarScreen() {
 
   const formatSelectedDate = () => {
     if (!selectedDate) return '';
-    return selectedDate.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
+    return selectedDate.toLocaleDateString(t.dateLocale, t.dateFormatOptions);
   };
 
   return (
@@ -93,7 +86,7 @@ export default function CalendarScreen() {
               letterSpacing: 2,
             }}
           >
-            Moon Time
+            {t.appTitle}
           </Text>
         </Animated.View>
 
@@ -127,7 +120,7 @@ export default function CalendarScreen() {
               textAlign: 'center',
             }}
           >
-            {MONTH_NAMES[month]} {year}
+            {t.months[month]} {year}
           </Text>
 
           <Pressable
@@ -201,8 +194,8 @@ export default function CalendarScreen() {
                 color: Colors.secondary,
               }}
             >
-              {selectedMoonData.phase},{' '}
-              {Math.round(selectedMoonData.illumination * 100)}% illuminated
+              {t.phases[selectedMoonData.phase]},{' '}
+              {Math.round(selectedMoonData.illumination * 100)}% {t.illuminated}
             </Text>
             <View style={{ height: 1, backgroundColor: Colors.border, marginVertical: 4 }} />
             <View style={{ gap: 4 }}>
@@ -215,7 +208,7 @@ export default function CalendarScreen() {
                   fontVariant: ['tabular-nums'],
                 }}
               >
-                Moonrise: {selectedMoonTimes.moonrise}
+                {t.moonrise} {selectedMoonTimes.moonrise}
               </Text>
               <Text
                 selectable
@@ -226,7 +219,7 @@ export default function CalendarScreen() {
                   fontVariant: ['tabular-nums'],
                 }}
               >
-                Moonset: {selectedMoonTimes.moonset}
+                {t.moonset} {selectedMoonTimes.moonset}
               </Text>
             </View>
           </Animated.View>

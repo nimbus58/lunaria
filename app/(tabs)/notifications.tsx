@@ -7,6 +7,8 @@ import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Typography';
 import { getUpcomingMoonEvents } from '@/utils/moon';
 import { useAppStore } from '@/store/useAppStore';
+import { useTranslation } from '@/lib/i18n';
+import type { Language } from '@/lib/i18n';
 import ScreenBackground from '@/components/screen-background';
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
@@ -16,7 +18,9 @@ export default function NotificationsScreen() {
   const insets = useSafeAreaInsets();
   const notificationSettings = useAppStore((s) => s.getNotificationSettings());
   const setNotificationSettings = useAppStore((s) => s.setNotificationSettings);
+  const setLanguage = useAppStore((s) => s.setLanguage);
   const [showTimePicker, setShowTimePicker] = useState(false);
+  const { t, language } = useTranslation();
 
   const upcomingEvents = useMemo(
     () => getUpcomingMoonEvents(new Date(), 8),
@@ -40,11 +44,15 @@ export default function NotificationsScreen() {
   );
 
   const formatEventDate = useCallback((date: Date) => {
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-    });
-  }, []);
+    return date.toLocaleDateString(t.dateLocale, t.shortDateOptions);
+  }, [t]);
+
+  const handleLanguageChange = useCallback(
+    (lang: Language) => {
+      setLanguage(lang);
+    },
+    [setLanguage]
+  );
 
   return (
     <ScreenBackground>
@@ -67,7 +75,7 @@ export default function NotificationsScreen() {
               letterSpacing: 2,
             }}
           >
-            Notifications
+            {t.notifications}
           </Text>
           <View
             style={{
@@ -77,6 +85,106 @@ export default function NotificationsScreen() {
               width: 100,
             }}
           />
+        </Animated.View>
+
+        {/* Language Toggle */}
+        <Animated.View
+          entering={FadeInDown.duration(500).delay(50)}
+          style={{
+            backgroundColor: Colors.surface,
+            borderRadius: 16,
+            borderCurve: 'continuous',
+            borderWidth: 1,
+            borderColor: Colors.border,
+            padding: 20,
+            gap: 14,
+          }}
+        >
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <Ionicons name="language-outline" size={20} color={Colors.accent} />
+            <Text
+              style={{
+                fontFamily: Fonts.semiBold,
+                fontSize: 16,
+                color: Colors.text,
+              }}
+            >
+              {t.language}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: 10,
+            }}
+          >
+            <Pressable
+              onPress={() => handleLanguageChange('en')}
+              style={({ pressed }) => ({
+                flex: 1,
+                paddingVertical: 12,
+                paddingHorizontal: 16,
+                borderRadius: 12,
+                borderCurve: 'continuous',
+                backgroundColor:
+                  language === 'en' ? Colors.accentDim : Colors.surfaceLight,
+                borderWidth: 1.5,
+                borderColor:
+                  language === 'en' ? Colors.accent : Colors.border,
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 4,
+                opacity: pressed ? 0.7 : 1,
+              })}
+            >
+              <Text style={{ fontSize: 20 }}>EN</Text>
+              <Text
+                style={{
+                  fontFamily:
+                    language === 'en' ? Fonts.semiBold : Fonts.regular,
+                  fontSize: 13,
+                  color:
+                    language === 'en' ? Colors.accent : Colors.secondary,
+                }}
+              >
+                {t.english}
+              </Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => handleLanguageChange('fr')}
+              style={({ pressed }) => ({
+                flex: 1,
+                paddingVertical: 12,
+                paddingHorizontal: 16,
+                borderRadius: 12,
+                borderCurve: 'continuous',
+                backgroundColor:
+                  language === 'fr' ? Colors.accentDim : Colors.surfaceLight,
+                borderWidth: 1.5,
+                borderColor:
+                  language === 'fr' ? Colors.accent : Colors.border,
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 4,
+                opacity: pressed ? 0.7 : 1,
+              })}
+            >
+              <Text style={{ fontSize: 20 }}>FR</Text>
+              <Text
+                style={{
+                  fontFamily:
+                    language === 'fr' ? Fonts.semiBold : Fonts.regular,
+                  fontSize: 13,
+                  color:
+                    language === 'fr' ? Colors.accent : Colors.secondary,
+                }}
+              >
+                {t.french}
+              </Text>
+            </Pressable>
+          </View>
         </Animated.View>
 
         {/* Toggle Cards */}
@@ -110,7 +218,7 @@ export default function NotificationsScreen() {
                   color: Colors.text,
                 }}
               >
-                Full Moon
+                {t.fullMoon}
               </Text>
             </View>
             <Switch
@@ -147,7 +255,7 @@ export default function NotificationsScreen() {
                   color: Colors.text,
                 }}
               >
-                New Moon
+                {t.newMoon}
               </Text>
             </View>
             <Switch
@@ -184,16 +292,17 @@ export default function NotificationsScreen() {
               justifyContent: 'space-between',
             }}
           >
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1 }}>
               <Ionicons name="time-outline" size={20} color={Colors.accent} />
               <Text
                 style={{
                   fontFamily: Fonts.medium,
                   fontSize: 16,
                   color: Colors.text,
+                  flexShrink: 1,
                 }}
               >
-                Notify me at:
+                {t.notifyMeAt}
               </Text>
             </View>
             <Pressable
@@ -305,7 +414,7 @@ export default function NotificationsScreen() {
                 color: Colors.text,
               }}
             >
-              Upcoming Moons
+              {t.upcomingMoons}
             </Text>
           </View>
 
@@ -352,7 +461,7 @@ export default function NotificationsScreen() {
                     color: event.type === 'full' ? Colors.accent : Colors.secondaryDim,
                   }}
                 >
-                  {event.type === 'full' ? 'Full Moon' : 'New Moon'}
+                  {event.type === 'full' ? t.fullMoon : t.newMoon}
                 </Text>
               </View>
             </View>
@@ -379,9 +488,7 @@ export default function NotificationsScreen() {
               lineHeight: 18,
             }}
           >
-            {Platform.OS === 'web'
-              ? 'Notifications are available on mobile devices. Your preferences are saved.'
-              : 'You will receive a notification on the morning of each event at your selected time.'}
+            {Platform.OS === 'web' ? t.infoWeb : t.infoMobile}
           </Text>
         </Animated.View>
       </ScrollView>

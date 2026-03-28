@@ -10,7 +10,10 @@ export interface NotificationSettings {
   time: string;
 }
 
+export type Language = 'en' | 'fr';
+
 export interface Preferences {
   location?: LocationData;
   notificationSettings?: NotificationSettings;
+  language?: Language;
 }

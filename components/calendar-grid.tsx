@@ -4,6 +4,7 @@ import { Colors } from '@/constants/Colors';
 import { Fonts } from '@/constants/Typography';
 import MoonPhaseIcon from './moon-phase-icon';
 import { getCalendarMoonData, isFullMoon, isNewMoon } from '@/utils/moon';
+import { useTranslation } from '@/lib/i18n';
 
 interface Props {
   year: number;
@@ -12,10 +13,9 @@ interface Props {
   onSelectDay: (day: number) => void;
 }
 
-const DAY_LABELS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
-
 export default function CalendarGrid({ year, month, selectedDay, onSelectDay }: Props) {
   const { width } = useWindowDimensions();
+  const { t } = useTranslation();
   const gridWidth = Math.min(width - 32, 400);
   const cellSize = Math.floor(gridWidth / 7);
   const iconSize = Math.max(16, cellSize * 0.42);
@@ -125,8 +125,8 @@ export default function CalendarGrid({ year, month, selectedDay, onSelectDay }: 
     <View style={{ alignItems: 'center' }}>
       {/* Day labels */}
       <View style={{ flexDirection: 'row', marginBottom: 4 }}>
-        {DAY_LABELS.map((label) => (
-          <View key={label} style={{ width: cellSize, alignItems: 'center' }}>
+        {t.dayLabels.map((label, idx) => (
+          <View key={`${label}-${idx}`} style={{ width: cellSize, alignItems: 'center' }}>
             <Text
               style={{
                 fontFamily: Fonts.medium,

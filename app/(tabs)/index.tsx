@@ -18,6 +18,7 @@ import { Fonts } from '@/constants/Typography';
 import { getMoonData, getMoonTimes, getNextMoonEvent } from '@/utils/moon';
 import { requestLocation } from '@/utils/location';
 import { useAppStore } from '@/store/useAppStore';
+import { useTranslation } from '@/lib/i18n';
 import ScreenBackground from '@/components/screen-background';
 import MoonVisual from '@/components/moon-visual';
 
@@ -26,6 +27,7 @@ export default function HomeScreen() {
   const { width } = useWindowDimensions();
   const [refreshing, setRefreshing] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const { t } = useTranslation();
 
   const location = useAppStore((s) => s.getLocation());
   const locationLoading = useAppStore((s) => s.locationLoading);
@@ -68,6 +70,17 @@ export default function HomeScreen() {
 
   const illuminationPct = Math.round(moonData.illumination * 100);
 
+  const nextEventText = useMemo(() => {
+    if (nextEvent.daysUntil === 0) {
+      return nextEvent.type === 'full'
+        ? t.fullMoonTonight
+        : t.newMoonTonight;
+    }
+    return nextEvent.type === 'full'
+      ? t.daysUntilFull(nextEvent.daysUntil)
+      : t.daysUntilNew(nextEvent.daysUntil);
+  }, [nextEvent, t]);
+
   return (
     <ScreenBackground>
       <ScrollView
@@ -98,7 +111,7 @@ export default function HomeScreen() {
               letterSpacing: 2,
             }}
           >
-            Moon Time
+            {t.appTitle}
           </Text>
         </Animated.View>
 
@@ -130,7 +143,7 @@ export default function HomeScreen() {
               textTransform: 'uppercase',
             }}
           >
-            {moonData.phase}
+            {t.phases[moonData.phase]}
           </Text>
         </Animated.View>
 
@@ -146,7 +159,7 @@ export default function HomeScreen() {
               fontVariant: ['tabular-nums'],
             }}
           >
-            {illuminationPct}% illuminated
+            {illuminationPct}% {t.illuminated}
           </Text>
         </Animated.View>
 
@@ -170,7 +183,7 @@ export default function HomeScreen() {
                   color: Colors.secondaryDim,
                 }}
               >
-                Moonrise:
+                {t.moonrise}
               </Text>
             </View>
             <Text
@@ -196,7 +209,7 @@ export default function HomeScreen() {
                   color: Colors.secondaryDim,
                 }}
               >
-                Moonset:
+                {t.moonset}
               </Text>
             </View>
             <Text
@@ -228,13 +241,7 @@ export default function HomeScreen() {
               fontVariant: ['tabular-nums'],
             }}
           >
-            {nextEvent.daysUntil === 0
-              ? nextEvent.type === 'full'
-                ? 'Full Moon tonight!'
-                : 'New Moon tonight!'
-              : `${nextEvent.daysUntil} ${nextEvent.daysUntil === 1 ? 'day' : 'days'} until ${
-                  nextEvent.type === 'full' ? 'Full Moon' : 'New Moon'
-                }`}
+            {nextEventText}
           </Text>
         </Animated.View>
 

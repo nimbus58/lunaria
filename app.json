@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Moon Time",
-    "slug": "moon-time",
+    "name": "Lunaria",
+    "slug": "lunaria",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/moon_icon.png",
-    "scheme": "moontime",
+    "scheme": "fastshot",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "ios": {
