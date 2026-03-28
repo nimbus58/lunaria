@@ -1,8 +1,16 @@
-/**
- * Base entity types for the app store.
- *
- * The skeleton phase will extend this file with app-specific entity
- * interfaces derived from the development plan's data model.
- */
+export interface LocationData {
+  lat: number;
+  lon: number;
+  cityName: string;
+}
 
-export interface Preferences {}
+export interface NotificationSettings {
+  fullMoon: boolean;
+  newMoon: boolean;
+  time: string;
+}
+
+export interface Preferences {
+  location?: LocationData;
+  notificationSettings?: NotificationSettings;
+}

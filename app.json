@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Lunaria",
-    "slug": "lunaria",
+    "name": "Moon Time",
+    "slug": "moon-time",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "fastshot",
-    "userInterfaceStyle": "light",
+    "scheme": "moontime",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false
@@ -14,7 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#060818"
       },
       "edgeToEdgeEnabled": true
     },
@@ -31,7 +31,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#060818"
         }
       ]
     ],
