@@ -92,9 +92,7 @@ export function getMoonTimes(date: Date, lat: number, _lon: number): MoonTimes {
 function formatHour(hour: number): string {
   const h = Math.floor(hour);
   const m = Math.floor((hour - h) * 60);
-  const period = h >= 12 ? 'PM' : 'AM';
-  const displayHour = h === 0 ? 12 : h > 12 ? h - 12 : h;
-  return `${displayHour}:${m.toString().padStart(2, '0')} ${period}`;
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
 }
 
 export function getDaysUntilFullMoon(date: Date): number {
