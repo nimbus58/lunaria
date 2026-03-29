@@ -21,6 +21,7 @@ export interface Translations {
   daysUntilNew: (days: number) => string;
   months: string[];
   dayLabels: string[];
+  dayNamesShort: string[];
   notifications: string;
   fullMoon: string;
   newMoon: string;
@@ -34,6 +35,13 @@ export interface Translations {
   dateLocale: string;
   dateFormatOptions: DateFormatOptions;
   shortDateOptions: DateFormatOptions;
+  forecast: string;
+  tenDayForecast: string;
+  today: string;
+  tomorrow: string;
+  illuminationLabel: string;
+  riseSet: string;
+  noData: string;
 }
 
 const en: Translations = {
@@ -65,6 +73,7 @@ const en: Translations = {
     'July', 'August', 'September', 'October', 'November', 'December',
   ],
   dayLabels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+  dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 
   notifications: 'Notifications',
   fullMoon: 'Full Moon',
@@ -81,6 +90,14 @@ const en: Translations = {
   dateLocale: 'en-US',
   dateFormatOptions: { month: 'long', day: 'numeric', year: 'numeric' },
   shortDateOptions: { month: 'short', day: 'numeric' },
+
+  forecast: 'Forecast',
+  tenDayForecast: '10-Day Lunar Forecast',
+  today: 'Today',
+  tomorrow: 'Tomorrow',
+  illuminationLabel: 'Illumination',
+  riseSet: 'Rise / Set',
+  noData: 'No forecast data available',
 };
 
 const fr: Translations = {
@@ -112,6 +129,7 @@ const fr: Translations = {
     'Juillet', 'Ao\u00fbt', 'Septembre', 'Octobre', 'Novembre', 'D\u00e9cembre',
   ],
   dayLabels: ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'],
+  dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 
   notifications: 'Notifications',
   fullMoon: 'Pleine Lune',
@@ -128,6 +146,14 @@ const fr: Translations = {
   dateLocale: 'fr-FR',
   dateFormatOptions: { month: 'long', day: 'numeric', year: 'numeric' },
   shortDateOptions: { month: 'short', day: 'numeric' },
+
+  forecast: 'Pr\u00e9visions',
+  tenDayForecast: 'Pr\u00e9visions lunaires sur 10 jours',
+  today: "Aujourd'hui",
+  tomorrow: 'Demain',
+  illuminationLabel: '\u00c9clairement',
+  riseSet: 'Lever / Coucher',
+  noData: 'Aucune donn\u00e9e de pr\u00e9vision disponible',
 };
 
 const translations: Record<Language, Translations> = { en, fr };

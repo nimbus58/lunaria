@@ -158,6 +158,37 @@ export function getCalendarMoonData(year: number, month: number): Map<number, Mo
   return map;
 }
 
+export interface ForecastDay {
+  date: Date;
+  moonData: MoonData;
+  moonTimes: MoonTimes;
+}
+
+export function getForecastDays(
+  startDate: Date,
+  count: number,
+  lat: number,
+  lon: number
+): ForecastDay[] {
+  const days: ForecastDay[] = [];
+  for (let i = 0; i < count; i++) {
+    const date = new Date(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      startDate.getDate() + i,
+      12,
+      0,
+      0
+    );
+    days.push({
+      date,
+      moonData: getMoonData(date),
+      moonTimes: getMoonTimes(date, lat, lon),
+    });
+  }
+  return days;
+}
+
 export function isFullMoon(data: MoonData): boolean {
   return data.phase === 'Full Moon';
 }
