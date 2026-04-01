@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/moon_icon.png",
         "backgroundColor": "#060818"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.nimbus.lunaria"
     },
     "web": {
       "bundler": "metro",
@@ -37,7 +38,14 @@
     ],
     "experiments": {
       "typedRoutes": true,
-      "baseUrl": ""
+      "baseUrl": "/5caeac88-91ad-4aab-b612-a30f6b14b520/7445186c97ad18b9/"
+    },
+    "owner": "nimbus1958",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "d0290d23-5f47-4d02-a8a9-af0055260a71"
+      }
     }
   }
 }
