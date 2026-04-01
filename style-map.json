@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": 1775030933583,
+  "generatedAt": 1775032593585,
   "entries": {
     "CalendarScreen@app/(tabs)/calendar.tsx:80": {
       "element": {
@@ -2852,6 +2852,80 @@
         }
       ]
     },
+    "ScreenBackground@components/screen-background.tsx:13": {
+      "element": {
+        "file": "components/screen-background.tsx",
+        "line": 13
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "components/screen-background.tsx",
+          "properties": {
+            "flex": {
+              "line": 16,
+              "col": 16,
+              "endCol": 17,
+              "raw": "1"
+            }
+          }
+        },
+        {
+          "origin": "dynamic",
+          "resolvable": false
+        }
+      ]
+    },
+    "ScreenBackground@components/screen-background.tsx:24": {
+      "element": {
+        "file": "components/screen-background.tsx",
+        "line": 24
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "components/screen-background.tsx",
+          "properties": {
+            "position": {
+              "line": 26,
+              "col": 20,
+              "endCol": 30,
+              "raw": "'absolute'"
+            },
+            "top": {
+              "line": 27,
+              "col": 15,
+              "endCol": 16,
+              "raw": "0"
+            },
+            "left": {
+              "line": 28,
+              "col": 16,
+              "endCol": 17,
+              "raw": "0"
+            },
+            "right": {
+              "line": 29,
+              "col": 17,
+              "endCol": 18,
+              "raw": "0"
+            },
+            "height": {
+              "line": 30,
+              "col": 18,
+              "endCol": 21,
+              "raw": "160"
+            },
+            "opacity": {
+              "line": 32,
+              "col": 19,
+              "endCol": 22,
+              "raw": "0.3"
+            }
+          }
+        }
+      ]
+    },
     "renderCell@components/calendar-grid.tsx:65": {
       "element": {
         "file": "components/calendar-grid.tsx",
@@ -2991,80 +3065,6 @@
               "col": 54,
               "endCol": 59,
               "raw": "'row'"
-            }
-          }
-        }
-      ]
-    },
-    "ScreenBackground@components/screen-background.tsx:13": {
-      "element": {
-        "file": "components/screen-background.tsx",
-        "line": 13
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "components/screen-background.tsx",
-          "properties": {
-            "flex": {
-              "line": 16,
-              "col": 16,
-              "endCol": 17,
-              "raw": "1"
-            }
-          }
-        },
-        {
-          "origin": "dynamic",
-          "resolvable": false
-        }
-      ]
-    },
-    "ScreenBackground@components/screen-background.tsx:24": {
-      "element": {
-        "file": "components/screen-background.tsx",
-        "line": 24
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "components/screen-background.tsx",
-          "properties": {
-            "position": {
-              "line": 26,
-              "col": 20,
-              "endCol": 30,
-              "raw": "'absolute'"
-            },
-            "top": {
-              "line": 27,
-              "col": 15,
-              "endCol": 16,
-              "raw": "0"
-            },
-            "left": {
-              "line": 28,
-              "col": 16,
-              "endCol": 17,
-              "raw": "0"
-            },
-            "right": {
-              "line": 29,
-              "col": 17,
-              "endCol": 18,
-              "raw": "0"
-            },
-            "height": {
-              "line": 30,
-              "col": 18,
-              "endCol": 21,
-              "raw": "160"
-            },
-            "opacity": {
-              "line": 32,
-              "col": 19,
-              "endCol": 22,
-              "raw": "0.3"
             }
           }
         }
